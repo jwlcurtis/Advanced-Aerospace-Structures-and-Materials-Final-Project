@@ -27,9 +27,9 @@ muLT=F(1)*F(4)+M(1)*M(4);
 
 muTL=muLT/EL*ET;
 % Creates the Q (theta=0) matrix of the composite
-Q11=EL/(1-muLT*muTL)
-Q22=ET/(1-muLT*muTL)
-Q12=muTL*EL/(1-muLT*muTL)
+Q11=EL/(1-muLT*muTL);
+Q22=ET/(1-muLT*muTL);
+Q12=muTL*EL/(1-muLT*muTL);
 Q66=GLT;
 
 Q_C=[Q11,Q12,0;
@@ -42,18 +42,27 @@ Gm=Al(2)/(2*(1+Al(4)));
 
 GLT=Al(2)/(2*(1+Al(4)));
 
-Q11=Al(2)/(1-Al(4)*Al(4))
-Q22=Al(2)/(1-Al(4)*Al(4))
-Q12=Al(4)*Al(2)/(1-Al(4)*Al(4))
+Q11=Al(2)/(1-Al(4)*Al(4));
+Q22=Al(2)/(1-Al(4)*Al(4));
+Q12=Al(4)*Al(2)/(1-Al(4)*Al(4));
 Q66=GLT;
 
 Q_Al=[Q11,Q12,0;
     Q12,Q22,0;
-    0,0,Q66]
+    0,0,Q66];
+
 %% Design Problem 1a
 
 %% Functions
 %% Transform Function
-function[Q_t]=transform(theta)
+function[Q_t]=transform(theta,Q)
+% theta is in degrees
+T1_inverse=[cosd(theta)^2 sind(theta)^2 -2*sind(theta)*cosd(theta)
+    sind(theta)^2 cosd(theta)^2 2*sind(theta)*cosd(theta)
+    sind(theta)*cosd(theta) -sind(theta)*cosd(theta) cosd(theta)^2-sind(theta)^2 ];
 
+T2=[cosd(theta)^2 sind(theta)^2 sind(theta)*cosd(theta)
+    sind(theta)^2 cosd(theta)^2 -sind(theta)*cosd(theta)
+    -2*sind(theta)*cosd(theta) 2*sind(theta)*cosd(theta) cosd(theta)^2-sind(theta)^2 ];
+Q_t=T1_inverse*Q*T2;
 end
