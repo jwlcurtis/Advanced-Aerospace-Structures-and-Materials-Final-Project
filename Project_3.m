@@ -32,11 +32,24 @@ Q22=ET/(1-muLT*muTL)
 Q12=muTL*EL/(1-muLT*muTL)
 Q66=GLT;
 
-QQ=[Q11,Q12,0;
+Q_C=[Q11,Q12,0;
     Q12,Q22,0;
     0,0,Q66]
 %% Aluminum Q matrix
 
+Gf=Al(2)/(2*(1+Al(4)));
+Gm=Al(2)/(2*(1+Al(4)));
+
+GLT=Al(2)/(2*(1+Al(4)));
+
+Q11=Al(2)/(1-Al(4)*Al(4))
+Q22=Al(2)/(1-Al(4)*Al(4))
+Q12=Al(4)*Al(2)/(1-Al(4)*Al(4))
+Q66=GLT;
+
+Q_Al=[Q11,Q12,0;
+    Q12,Q22,0;
+    0,0,Q66]
 %% Design Problem 1a
 
 %% Functions
