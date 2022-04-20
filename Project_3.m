@@ -82,6 +82,25 @@ Q_theta_90={Q_Al transform(90,Q_C) Q_Al transform(90,Q_C) Q_Al};
 N_1b=[1;1;1]; %[N/mm]
 M_1b=[1;1;1];%[N-mm/mm]
 
+NM_1b=[N_1b;M_1b];
+
+% baseline Al
+res_Al=midplate(A_Al,B_Al,D_Al,NM_1b);
+
+% theta=0
+res_theta_0=midplate(A_theta_0,B_theta_0,D_theta_0,NM_1b);
+
+% theta=30
+res_theta_30=midplate(A_theta_30,B_theta_30,D_theta_30,NM_1b);
+
+% theta=45
+res_theta_45=midplate(A_theta_45,B_theta_45,D_theta_45,NM_1b);
+
+% theta=60
+res_theta_60=midplate(A_theta_60,B_theta_60,D_theta_60,NM_1b);
+
+% theta=90
+res_theta_90=midplate(A_theta_90,B_theta_90,D_theta_90,NM_1b);
 
 %% Design Problem 1c
 rho_C=F(1)*F(3)+M(1)*M(3);
@@ -100,7 +119,7 @@ T2=[cosd(theta)^2 sind(theta)^2 sind(theta)*cosd(theta)
     -2*sind(theta)*cosd(theta) 2*sind(theta)*cosd(theta) cosd(theta)^2-sind(theta)^2 ];
 Q_t=T1_inverse*Q*T2;
 end
-%% A, B and D matrix for Q1
+%% A, B and D matrix for Q 1a
 function [A,B,D]=ABD_Q1(Q,h)
 % Q=cell array of all the Q matricies
 % h=vector of all the ply thichnesses from top to bottom
@@ -118,4 +137,10 @@ for i=1:length(Q)
 end
 B=(1/2).*B;
 D=(1/3).*D;
+end
+%% Q 1b midplate response
+function [res]=midplate(A,B,D,NM)
+EE=[A,B;B,D];
+res=inv(EE)*NM;
+res=res';
 end
