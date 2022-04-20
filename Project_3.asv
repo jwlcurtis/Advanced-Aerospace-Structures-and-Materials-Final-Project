@@ -34,7 +34,7 @@ Q66=GLT;
 
 Q_C=[Q11,Q12,0;
     Q12,Q22,0;
-    0,0,Q66]
+    0,0,Q66];
 %% Aluminum Q matrix
 
 Gf=Al(2)/(2*(1+Al(4)));
@@ -52,7 +52,20 @@ Q_Al=[Q11,Q12,0;
     0,0,Q66];
 
 %% Design Problem 1a
-h_1a=[2.5 1.5 0.5 -0.5 -1.5 -2.5];
+h_1a=[-2.5 -1.5 -0.5 0.5 1.5 2.5];
+
+% baseline Al
+Q_baseline={Q_Al Q_Al Q_Al Q_Al Q_Al};
+[A_Al,B_Al,D_Al]=ABD_Q1(Q_baseline,h_1a);
+
+% theta=0
+Q_theta_0={Q_Al transform(30,Q_C) Q_Al transform(30,Q_C) Q_Al};
+[A_theta_0,B_theta_0,D_theta_0]=ABD_Q1(Q_theta_0,h_1a);
+
+% theta=30
+Q_theta_0={Q_Al Q_C Q_Al Q_C Q_Al};
+[A_theta_0,B_theta_0,D_theta_0]=ABD_Q1(Q_theta_0,h_1a);
+
 
 %% Functions
 %% Transform Function

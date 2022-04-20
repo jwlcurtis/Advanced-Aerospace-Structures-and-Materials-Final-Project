@@ -58,6 +58,26 @@ h_1a=[-2.5 -1.5 -0.5 0.5 1.5 2.5];
 Q_baseline={Q_Al Q_Al Q_Al Q_Al Q_Al};
 [A_Al,B_Al,D_Al]=ABD_Q1(Q_baseline,h_1a);
 
+% theta=0
+Q_theta_0={Q_Al Q_C Q_Al Q_C Q_Al};
+[A_theta_0,B_theta_0,D_theta_0]=ABD_Q1(Q_theta_0,h_1a);
+
+% theta=30
+Q_theta_30={Q_Al transform(30,Q_C) Q_Al transform(30,Q_C) Q_Al};
+[A_theta_30,B_theta_30,D_theta_30]=ABD_Q1(Q_theta_30,h_1a);
+
+% theta=45
+Q_theta_45={Q_Al transform(45,Q_C) Q_Al transform(45,Q_C) Q_Al};
+[A_theta_45,B_theta_45,D_theta_45]=ABD_Q1(Q_theta_45,h_1a);
+
+% theta=60
+Q_theta_60={Q_Al transform(60,Q_C) Q_Al transform(60,Q_C) Q_Al};
+[A_theta_60,B_theta_60,D_theta_60]=ABD_Q1(Q_theta_60,h_1a);
+
+% theta=90
+Q_theta_90={Q_Al transform(90,Q_C) Q_Al transform(90,Q_C) Q_Al};
+[A_theta_90,B_theta_90,D_theta_90]=ABD_Q1(Q_theta_90,h_1a);
+
 %% Functions
 %% Transform Function
 function[Q_t]=transform(theta,Q)
