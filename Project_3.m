@@ -78,6 +78,15 @@ Q_theta_60={Q_Al transform(60,Q_C) Q_Al transform(60,Q_C) Q_Al};
 Q_theta_90={Q_Al transform(90,Q_C) Q_Al transform(90,Q_C) Q_Al};
 [A_theta_90,B_theta_90,D_theta_90]=ABD_Q1(Q_theta_90,h_1a);
 
+%% Design Problem 1b
+N_1b=[1;1;1]; %[N/mm]
+M_1b=[1;1;1];%[N-mm/mm]
+
+
+%% Design Problem 1c
+rho_C=F(1)*F(3)+M(1)*M(3);
+rho_Al=Al(3);
+
 %% Functions
 %% Transform Function
 function[Q_t]=transform(theta,Q)
