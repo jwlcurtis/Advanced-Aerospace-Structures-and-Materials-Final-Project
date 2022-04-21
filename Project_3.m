@@ -106,7 +106,7 @@ res_theta_90=midplate(A_theta_90,B_theta_90,D_theta_90,NM_1b);
 rho_C=F(1)*F(3)+M(1)*M(3);
 rho_Al=Al(3);
 
-[h_test,res_test]=matching(0,Q_C,Q_Al,NM_1b,h_1a,0.01,10)
+[h_test,res_test]=matching(0,Q_C,Q_Al,NM_1b,h_1a,0.01,100)
 res_Al
 %% Functions
 %% Transform Function
@@ -161,7 +161,7 @@ for i=1:length(t_range)
     [A_theta_test,B_theta_test,D_theta_test]=ABD_Q1(Q_theta_test,h_vector);
     res_theta_test=midplate(A_theta_test,B_theta_test,D_theta_test,NM).';
     
-    if (abs(res_theta_test(1)-res_Al(1))<1*10^-15) %&& (abs(res_theta_test(2)-res_Al(2))<1*10^-15) && (abs(res_theta_test(3)-res_Al(3))<1*10^-15) && (abs(res_theta_test(4)-res_Al(4))<1*10^-15) && (abs(res_theta_test(5)-res_Al(5))<1*10^-15) && (abs(res_theta_test(6)-res_Al(6))<1*10^-15)
+    if (res_theta_test(1)<res_Al(1)) && (res_theta_test(2)<res_Al(2)) && (res_theta_test(3)<res_Al(3)) && (res_theta_test(4)<res_Al(4)) && (res_theta_test(5)<res_Al(5)) && (res_theta_test(6)<res_Al(6))
         h=t_range(i);
         res=res_theta_test;
         break
