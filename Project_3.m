@@ -159,6 +159,8 @@ e_y_0=sigma_LU/(Q_C(1,2)+((Q_C(1,1))*e_y_coeff_0));
 e_x_0=e_y_coeff_0*e_y_0;
 Nx_0=(A_3(1,1)*e_x_0)+(A_3(1,2)*e_y_0)
 
+%% Design Problem 3
+
 %% Tables
 %% Functions
 %% Transform Function
@@ -216,6 +218,23 @@ for i=1:length(t_range)
     if (res_theta_test(1)<res_Al(1)) && (res_theta_test(2)<res_Al(2)) && (res_theta_test(3)<res_Al(3)) && (res_theta_test(4)<res_Al(4)) && (res_theta_test(5)<res_Al(5)) && (res_theta_test(6)<res_Al(6))
         h=t_range(i);
         res=res_theta_test;
+        break
+    end
+
+
+end
+end
+
+%% Q3 thickness optimization
+function [t]=thickness(theta_tb,theta_m,Q,t_low,t_high)
+t_range=t_low:0.01:t_high
+for i=1:length(t_range)
+    h_vector=[-1.5*t_range(i) -0.5*t_range(i) 0.5*t_range(i) 1.5*t_range(i)] ; % creates the all the height to calculate then A B D matrix 
+    Q_theta_test={transform(theta_tb,Q) transform(theta_n,Q_C) transform(theta_tb,Q)};
+    [A_theta_test,B_theta_test,D_theta_test]=ABD_Q1(Q_theta_test,h_vector);
+    
+    if (D_theta_test(3,1)==0) && (D_theta_test(3,2)==0)
+        t=t_range(i);
         break
     end
 
