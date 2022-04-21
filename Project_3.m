@@ -149,7 +149,7 @@ Q_3={transform(0,Q_C) transform(90,Q_C) transform(90,Q_C) transform(90,Q_C) Q_C}
 A_3=ABD_Q1(Q_3,h_1a)
 Q_C_90=transform(90,Q_C)
 e_y_coeff_90=(-A_3(2,2))/(A_3(2,1))
-e_y_90=sigma_TU/(Q_C_90(1,2)-((Q_C_90(1,1))*e_y_coeff_90))
+e_y_90=sigma_TU/(Q_C_90(1,2)+((Q_C_90(1,1))*e_y_coeff_90))
 e_x_90=e_y_coeff_90*e_y_90
 Nx_90=(A_3(1,1)*e_x_90)+(A_3(1,2)*e_y_90)
 %% Tables
