@@ -106,8 +106,14 @@ res_theta_90=midplate(A_theta_90,B_theta_90,D_theta_90,NM_1b);
 rho_C=F(1)*F(3)+M(1)*M(3);
 rho_Al=Al(3);
 
-[h_test,res_test]=matching(0,Q_C,Q_Al,NM_1b,h_1a,0.01,100)
+[h_test,res_test]=matching(90,Q_C,Q_Al,NM_1b,h_1a,0.01,100)
 res_Al
+
+%% Failure Analysis Problem 2
+% Use maximum stress theory to predict Nx values to cause failure in 90 and
+% 0 deg. ply
+
+
 %% Functions
 %% Transform Function
 function[Q_t]=transform(theta,Q)
@@ -151,7 +157,7 @@ function [h,res]=matching(theta,Q_C,Q_Al,NM,h_b,h_low,h_high)
 % Create baseline response
 Q_baseline={Q_Al Q_Al Q_Al Q_Al Q_Al};
 [A_Al,B_Al,D_Al]=ABD_Q1(Q_baseline,h_b);
-res_Al=midplate(A_Al,B_Al,D_Al,NM).'
+res_Al=midplate(A_Al,B_Al,D_Al,NM).';
 
 t_range=h_low:0.0001:h_high; % composite thickness
 
