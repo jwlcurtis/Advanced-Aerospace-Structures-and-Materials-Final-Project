@@ -106,8 +106,30 @@ res_theta_90=midplate(A_theta_90,B_theta_90,D_theta_90,NM_1b);
 rho_C=F(1)*F(3)+M(1)*M(3);
 rho_Al=Al(3);
 
-[h_test,res_test]=matching(90,Q_C,Q_Al,NM_1b,h_1a,0.01,100)
-res_Al
+h_theta0=matching(0,Q_C,Q_Al,NM_1b,h_1a,0.01,100);
+
+h_theta30=matching(30,Q_C,Q_Al,NM_1b,h_1a,0.01,100);
+
+h_theta45=matching(45,Q_C,Q_Al,NM_1b,h_1a,0.01,100);
+
+h_theta60=matching(60,Q_C,Q_Al,NM_1b,h_1a,0.01,100);
+
+h_theta90=matching(90,Q_C,Q_Al,NM_1b,h_1a,0.01,100);
+
+rho_theta0=(rho_C*h_theta0*2)+(rho_Al*3);
+rho_theta30=(rho_C*h_theta30*2)+(rho_Al*3);
+rho_theta45=(rho_C*h_theta45*2)+(rho_Al*3);
+rho_theta60=(rho_C*h_theta60*2)+(rho_Al*3);
+rho_theta90=(rho_C*h_theta90*2)+(rho_Al*3);
+rho_baseline=(rho_Al*5);
+
+% calculate weight savings
+
+WS_theta0=(rho_theta0-rho_baseline)/rho_baseline;
+WS_theta30=(rho_theta30-rho_baseline)/rho_baseline;
+WS_theta45=(rho_theta45-rho_baseline)/rho_baseline;
+WS_theta60=(rho_theta60-rho_baseline)/rho_baseline;
+WS_theta90=(rho_theta90-rho_baseline)/rho_baseline;
 
 %% Failure Analysis Problem 2
 % Use maximum stress theory to predict Nx values to cause failure in 90 and
