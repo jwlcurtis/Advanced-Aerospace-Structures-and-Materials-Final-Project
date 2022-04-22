@@ -53,7 +53,7 @@ Q_Al=[Q11,Q12,0;
 
 %% Design Problem 1a
 h_1a=[-2.5 -1.5 -0.5 0.5 1.5 2.5];
-
+%h_1a=h_1a*10^-3
 % baseline Al
 Q_baseline={Q_Al Q_Al Q_Al Q_Al Q_Al};
 [A_Al,B_Al,D_Al]=ABD_Q1(Q_baseline,h_1a);
@@ -136,7 +136,7 @@ WS_theta90=(rho_theta90-rho_baseline)/rho_baseline;
 % 0 deg. ply
 % 1a
 % imput parameters
-sigma_LU=2000*10^6; %Pa
+sigma_LU=2000; %Pa
 sigma_TU_Sigma_LU=0.025; 
 tau_LTU_sigma_LU=0.05;
 
@@ -149,15 +149,15 @@ Q_3={transform(0,Q_C) transform(90,Q_C) transform(90,Q_C) transform(90,Q_C) Q_C}
 A_3=ABD_Q1(Q_3,h_1a);
 Q_C_90=transform(90,Q_C);
 e_y_coeff_90=(-A_3(2,2))/(A_3(2,1));
-e_y_90=sigma_TU/(Q_C_90(1,2)+((Q_C_90(1,1))*e_y_coeff_90));
+e_y_90=(sigma_TU*10^-3)/(Q_C_90(1,2)+((Q_C_90(1,1))*e_y_coeff_90));
 e_x_90=e_y_coeff_90*e_y_90;
-Nx_90=(A_3(1,1)*e_x_90)+(A_3(1,2)*e_y_90);
+Nx_90=(A_3(1,1)*e_x_90)+(A_3(1,2)*e_y_90)
 
 % Calculate N_x for theta =0
 e_y_coeff_0=(-A_3(2,2))/(A_3(2,1));
-e_y_0=sigma_LU/(Q_C(1,2)+((Q_C(1,1))*e_y_coeff_0));
+e_y_0=(sigma_LU*10^-3)/(Q_C(1,2)+((Q_C(1,1))*e_y_coeff_0));
 e_x_0=e_y_coeff_0*e_y_0;
-Nx_0=(A_3(1,1)*e_x_0)+(A_3(1,2)*e_y_0);
+Nx_0=(A_3(1,1)*e_x_0)+(A_3(1,2)*e_y_0)
 
 %% Design Problem 3
 Q_3={transform(45,Q_C) transform(-45,Q_C) transform(45,Q_C)}
@@ -165,7 +165,6 @@ h_3=[-(2)^(1/3), -1, 1, (2)^(1/3)];
 [A_3,B_3,D_3]=ABD_Q1(Q_3,h_3)
 
 
-%% Tables
 %% Functions
 %% Transform Function
 function[Q_t]=transform(theta,Q)
