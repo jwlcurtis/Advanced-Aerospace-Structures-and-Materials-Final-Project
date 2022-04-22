@@ -160,7 +160,11 @@ e_x_0=e_y_coeff_0*e_y_0;
 Nx_0=(A_3(1,1)*e_x_0)+(A_3(1,2)*e_y_0);
 
 %% Design Problem 3
-[t,theta_m,theta_tb]=thickness(Q_C,0.1,10)
+Q_3={transform(45,Q_C) transform(-45,Q_C) transform(45,Q_C)}
+h_3=[-(2)^(1/3), -1, 1, (2)^(1/3)];
+[A_3,B_3,D_3]=ABD_Q1(Q_3,h_3)
+
+
 %% Tables
 %% Functions
 %% Transform Function
@@ -219,33 +223,6 @@ for i=1:length(t_range)
         h=t_range(i);
         res=res_theta_test;
         break
-    end
-
-
-end
-end
-
-%% Q3 thickness optimization
-function [t,theta_m, theta_tb]=thickness(Q,t_low,t_high)
-t_range=t_low:0.1:t_high;
-theta=10:10:80;
-for i=1:length(t_range)
-    for j=1:length(t_range)
-        for k=1:length(theta)
-            for l=1:length(theta)
-            h_vector=[-0.5*t_range(i)-t_range(j) -0.5*t_range(i) 0.5*t_range(i) 0.5*t_range(i)+t_range(j)] ; % creates the all the height to calculate then A B D matrix 
-            Q_theta_test={transform(theta(l),Q) transform(theta(k),Q) transform(theta(l),Q)};
-            [A_theta_test,B_theta_test,D_theta_test]=ABD_Q1(Q_theta_test,h_vector);
-            i
-            if (D_theta_test(3,1)<1*10^-5) && (D_theta_test(3,2)<1*10^-5)
-                t=t_range(i);
-                theta_m=theta(k);
-                theta_tb=theta(l);
-                break
-            end
-            end
-        end
-    
     end
 
 
